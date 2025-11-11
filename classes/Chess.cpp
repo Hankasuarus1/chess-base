@@ -27,7 +27,7 @@ char Chess::pieceNotation(int x, int y) const
 Bit* Chess::PieceForPlayer(const int playerNumber, ChessPiece piece)
 {
     const char* pieces[] = { "pawn.png", "knight.png", "bishop.png", "rook.png", "queen.png", "king.png" };
-
+    
     Bit* bit = new Bit();
     // should possibly be cached from player class?
     const char* pieceName = pieces[piece - 1];
