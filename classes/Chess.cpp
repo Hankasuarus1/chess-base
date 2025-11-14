@@ -61,12 +61,12 @@ void Chess::FENtoBoard(const std::string& fen) {
     // 3: castling availability (KQkq or -)
     // 4: en passant target square (in algebraic notation, or -)
     // 5: halfmove clock (number of halfmoves since the last capture or pawn advance)
-    for (int x = 0; x < fen.size(); x++) {
-        int row = 0;
+    printf("setting up board from FEN: %s\n", fen.c_str());
+        int row = 7;
         int col = 0;
         for (char c : fen) {
             if (c == '/') {
-                row++;
+                row--;
                 col = 0;
             } else if (isdigit(c)) {
                 col += c - '0';
@@ -82,12 +82,17 @@ void Chess::FENtoBoard(const std::string& fen) {
                     case 'k': piece = King; break;
                 }
                 if (piece != NoPiece) {
-                    _grid->getSquare(col, row)->setBit(PieceForPlayer(playerNumber, piece));
+                    printf("%d/%d", row, col);
+                    ChessSquare *square = _grid->getSquare(col, row);
+                    Bit *bit = PieceForPlayer(playerNumber, piece);
+                    bit->setPosition(square->getPosition());
+                    bit->setParent(square);
+                    bit->setGameTag(isupper(c) ? piece : piece + 128);
+                    square->setBit(bit);
                 }
                 col++;
             }
         }
-    }
 
 }
 
