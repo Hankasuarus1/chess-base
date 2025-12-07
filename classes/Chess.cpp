@@ -209,7 +209,7 @@ void Chess::addPawnBitboardMovesToList(std::vector<BitMove>& moves, const BitBoa
     if (bitboard.getData() == 0) return;
     bitboard.forEachBit([&](int toSquare) {
         int fromSquare = toSquare - shift;
-        moves.emplace_back(fromSquare, toSquare, ChessPiece::Pawn);
+        moves.emplace_back(fromSquare, toSquare, Pawn);
     });
 }
 
