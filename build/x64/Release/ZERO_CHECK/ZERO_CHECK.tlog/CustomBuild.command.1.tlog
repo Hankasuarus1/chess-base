@@ -1,0 +1,10 @@
+^C:\USERS\HANKA\DOCUMENTS\GITHUB\CHESS-BASE\BUILD\CMAKEFILES\07F686CFC58C261DFF44A7199EEA50D9\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/hanka/Documents/GitHub/chess-base -BC:/Users/hanka/Documents/GitHub/chess-base/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/hanka/Documents/GitHub/chess-base/build/tictactoe.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

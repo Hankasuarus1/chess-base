@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\hanka\Documents\GitHub\chess-base\build\CMakeFiles\07f686cfc58c261dff44a7199eea50d9\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{5FA8D910-A9E7-3E4C-9CF8-CB45CF19854E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

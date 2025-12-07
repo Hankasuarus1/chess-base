@@ -3,11 +3,11 @@
 #include "Game.h"
 #include "Grid.h"
 #include "Bitboard.h"
+#include "GameState.h"
 
 constexpr int pieceSize = 80;
-
-constexpr int WHITE = 1;
-constexpr int BLACK = 2;
+constexpr int negInfinite = -1000000;
+constexpr int posInfinite = 1000000;
 //columns
 constexpr uint64_t FILE_A = 0x0101010101010101ULL;
 constexpr uint64_t FILE_B = FILE_A << 1;
@@ -56,7 +56,8 @@ public:
     void setStateString(const std::string &s) override;
 
     Grid* getGrid() override { return _grid; }
-
+    void updateAI();
+    bool gameHasAI() override { return true; }
 private:
     Bit* PieceForPlayer(const int playerNumber, ChessPiece piece);
     Player* ownerAt(int x, int y) const;
@@ -64,21 +65,14 @@ private:
     char pieceNotation(int x, int y) const;
 
     Grid* _grid;
-
-
+    int _currentPlayer = WHITE;
+    int _countMoves = 0;
+    GameState _gameState;
+    std::vector<BitMove> _moves;
     BitBoard _knightBitBoards[64];
     BitBoard _kingBitBoards[64];
-    std::vector<BitMove> _moves;
-    std::vector<BitMove> generateAllMoves();
-    
-    BitBoard generateKingMoveBitBoard(int square);
-    void generateKingMoves(std::vector<BitMove>& moves, BitBoard kingBoard, uint64_t emptySquares);
 
-    void generatePawnMoves(std::vector<BitMove>& moves, const BitBoard pawns, const BitBoard emptySquares, const BitBoard enemyPieces, char color);
-    void addPawnBitboardMovesToList(std::vector<BitMove>& moves, const BitBoard bitboard, int shift);
-
-    BitBoard generateKnightMoveBitBoard(int square);
-    void generateKnightMoves(std::vector<BitMove>& moves, BitBoard knightBoard, uint64_t emptySquares);
-
-    void validMove(const char *state, std::vector<BitMove>& moves, int fromRow, int toRow, int fromCol, int toCol, ChessPiece piece);
+    void clearBoardHighlights();
+    int negamax(GameState& state, int depth, int alpha, int beta);
+    int evaluateBoard(const GameState&);
 };
